@@ -2,138 +2,111 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Farida Fadel CV</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farida Fadel | Portfolio</title>
     <link rel="stylesheet" href="look.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
-
 <body>
 
+<nav class="navbar">
+    <div class="nav-content">
+        <span class="logo">FF</span>
+        <div class="nav-links">
+            <a href="#profile">About</a>
+            <a href="#education">Education</a>
+            <a href="#skills">Skills</a>
+            <a href="#experience">Experience</a>
+            <a href="#contact">Contact</a>
+        </div>
+        <button id="modeToggle"><i class="fas fa-moon"></i></button>
+    </div>
+</nav>
+
 <div class="container">
-
-    <header>
-        <img src="image.jpeg" alt="Profile Picture" class="profile">
-
+    <header id="profile">
+        <img src="image.jpeg" alt="Farida Fadel" class="profile">
         <h1>Farida Fadel</h1>
-
-        <button id="modeToggle">Toggle Dark Mode</button>
-
         <p class="title">Management of Information & Communication Technology Student</p>
-
-        <p>
-            Cairo, Egypt | +20 1211537777 |
-            faridafadel06@gmail.com
-        </p>
+        <p class="contact-details">Cairo, Egypt | +20 1211537777 | faridafadel06@gmail.com</p>
     </header>
 
-    <section>
-        <h2>Profile</h2>
-
-        <p>
-        Junior student studying Management of Information and Communication Technology at The America University in Cairo.
-        I'm particularly interested in the intersection of tech and consulting. 
-        </p>
+    <section id="quote-section" class="api-container">
+        <h2>Motivational Quote</h2>
+        <div id="quote-display">
+            <p id="quote-text">Loading inspiration...</p>
+            <p id="quote-author"></p>
+        </div>
+        <button id="newQuoteBtn">Refresh Quote</button>
     </section>
 
-
-    <section>
+    <section id="education">
         <h2>Education</h2>
-
         <h3>American University in Cairo</h3>
         <p>B.B.A Management of Information and Communication Technology</p>
-        <p>GPA: 3.89 / 4.0 – Highest Honors</p>
-        <p>Expected Graduation: Spring 2027</p>
-
-        <h3>George Mason University</h3>
-        <p>Business BA</p>
-        <p>GPA: 3.8 – Dean’s List</p>
-        <p>Fall 2022 – Spring 2024</p>
+        <p>GPA: 3.89 / 4.0 – Highest Honors | Expected 2027</p>
     </section>
 
-    <section>
-    <h2>Skills</h2>
+    <section id="skills">
+        <h2>Skills</h2>
+        <ul id="skillsList" class="skills-grid">
+            <li>Excel</li><li>SQL & MySQL</li><li>JavaScript</li><li>C++</li><li>R</li><li>Power BI</li><li>Figma</li>
+        </ul>
+        <div class="skill-input-group">
+            <input type="text" id="newSkill" placeholder="Add a skill">
+            <button id="addSkill">Add</button>
+        </div>
+    </section>
 
-    <ul id="skillsList">
-        <li>Excel</li>
-        <li>SQL & MySQL</li>
-        <li>JavaScript</li>
-        <li>C++</li>
-        <li>R</li>
-        <li>Power BI</li>
-        <li>Data Visualization</li>
-        <li>Figma</li>
-        <li>Visual Studio Code</li>
-    </ul>
+    <section id="experience">
+    <h2><i class="fas fa-briefcase"></i> Work Experience</h2>
 
-    <input type="text" id="newSkill" placeholder="Enter a new skill">
-    <button id="addSkill">Add Skill</button>
-
-</section>
-
-    <section>
-        <h2>Work Experience</h2>
-
-        <h3>AUC Career Center – Event Organizer</h3>
-        <p>Sept – Dec 2025</p>
+    <div class="exp-item">
+        <div class="exp-header">
+            <h3>AUC Career Center – Event Organizer</h3>
+            <span class="date">Sept – Dec 2025</span>
+        </div>
         <ul>
             <li>Coordinated campus career events with major employers.</li>
             <li>Organized professional networking sessions for students.</li>
         </ul>
+    </div>
 
-        <h3>LYNX Strategic Business Advisors – Consulting Intern</h3>
-        <p>Aug – Sept 2025</p>
+    <div class="exp-item">
+        <div class="exp-header">
+            <h3>LYNX Strategic Business Advisors – Consulting Intern</h3>
+            <span class="date">Aug – Sept 2025</span>
+        </div>
         <ul>
             <li>Conducted market research and stakeholder mapping.</li>
             <li>Drafted consulting proposals and reports.</li>
         </ul>
+    </div>
 
-        <h3>Talaat Moustafa Group – Information Systems Intern</h3>
-        <p>Aug 2025</p>
+    <div class="exp-item">
+        <div class="exp-header">
+            <h3>Talaat Moustafa Group – Information Systems Intern</h3>
+            <span class="date">Aug 2025</span>
+        </div>
         <ul>
             <li>Designed MySQL databases and ERD diagrams.</li>
             <li>Built front-end UI using HTML, CSS, and JavaScript.</li>
         </ul>
-
-    </section>
-
-
-    <section>
-        <h2>Achievements</h2>
-
-        <h3>Visa Consulting & Analytics Case Competition</h3>
-        <p>1st Place Winner – November 2025</p>
-
-        <p>
-        Designed a data-driven credit card concept for Egyptian mothers
-        including a financial model and go-to-market strategy.
-        </p>
-
-    </section>
-
-
-    <section>
-<h2>Contact Me</h2>
-
-<form id="contactForm">
-
-<label>Name:</label><br>
-<input type="text" id="name"><br><br>
-
-<label>Email:</label><br>
-<input type="email" id="email"><br><br>
-
-<label>Message:</label><br>
-<textarea id="message"></textarea><br><br>
-
-<button type="submit">Send</button>
-
-<p id="formMessage"></p>
-
-</form>
-
+    </div>
 </section>
 
-
+    <section id="contact">
+        <h2>Contact Me</h2>
+        <form id="contactForm">
+            <input type="text" id="name" placeholder="Name" required><br>
+            <input type="email" id="email" placeholder="Email" required><br>
+            <textarea id="message" placeholder="Message" required></textarea><br>
+            <button type="submit">Send Message</button>
+            <p id="formMessage"></p>
+        </form>
+    </section>
 </div>
+
 <script src="script.js"></script>
 </body>
 </html>
