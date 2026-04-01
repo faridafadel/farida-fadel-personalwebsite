@@ -1,62 +1,75 @@
-// welcome 
-window.onload = function () {
-    alert("Welcome to Farida Fadel's portfolio page!");
-};
+// 1. API Integration (Quotes API)
+const quoteText = document.getElementById("quote-text");
+const quoteAuthor = document.getElementById("quote-author");
+const newQuoteBtn = document.getElementById("newQuoteBtn");
 
-// toggle button
-const toggleButton = document.getElementById("modeToggle");
 
-toggleButton.addEventListener("click", function () {
+
+async function getQuote() {
+    quoteText.textContent = "Fetching inspiration...";
+    quoteAuthor.textContent = "";
+
+    const fallbackQuotes = [
+        { content: "The only way to do great work is to love what you do.", author: "Steve Jobs" },
+        { content: "Success is not final, failure is not fatal: it is the courage to continue that counts.", author: "Winston Churchill" },
+        { content: "Be yourself; everyone else is already taken.", author: "Oscar Wilde" },
+        { content: "Identify your problems, but give your power and energy to solutions.", author: "Tony Robbins" }
+    ];
+
+    try {
+        const response = await fetch("https://api.allorigins.win/raw?url=https://zenquotes.io/api/random");
+        
+        if (!response.ok) throw new Error("API Network response was not ok");
+        
+        const data = await response.json();
+        
+        
+        if (data && data[0]) {
+            quoteText.textContent = `"${data[0].q}"`;
+            quoteAuthor.textContent = `- ${data[0].a}`;
+            console.log("Quote loaded from API.");
+        } else {
+            throw new Error("API data format unexpected");
+        }
+
+    } catch (error) {
+        
+        console.warn("External API failed or blocked. Using fallback quote.", error);
+        
+      
+        const randomIndex = Math.floor(Math.random() * fallbackQuotes.length);
+        const backupQuote = fallbackQuotes[randomIndex];
+        
+        
+        quoteText.textContent = `"${backupQuote.content}"`;
+        quoteAuthor.textContent = `- ${backupQuote.author} (Offline Mode)`;
+    }
+}
+
+
+window.onload = getQuote;
+newQuoteBtn.addEventListener("click", getQuote);
+
+// 2. Dark Mode Toggle
+document.getElementById("modeToggle").addEventListener("click", () => {
     document.body.classList.toggle("dark-mode");
 });
 
-// skills
-const addButton = document.getElementById("addSkill");
-const skillInput = document.getElementById("newSkill");
-const skillsList = document.getElementById("skillsList");
-
-addButton.addEventListener("click", function () {
-
-    const newSkill = skillInput.value;
-
-    if (newSkill === "") {
-        alert("Please enter a skill");
-        return;
+// 3. Add Skill Logic (Maintained from Assignment 2)
+document.getElementById("addSkill").addEventListener("click", () => {
+    const input = document.getElementById("newSkill");
+    if (input.value.trim() !== "") {
+        const li = document.createElement("li");
+        li.textContent = input.value;
+        document.getElementById("skillsList").appendChild(li);
+        input.value = "";
     }
-
-    const li = document.createElement("li");
-    li.textContent = newSkill;
-
-    skillsList.appendChild(li);
-
-    skillInput.value = "";
 });
 
-// contact
-const form = document.getElementById("contactForm");
-const formMessage = document.getElementById("formMessage");
-
-form.addEventListener("submit", function (event) {
-
-    event.preventDefault();
-
-    const name = document.getElementById("name").value;
-    const email = document.getElementById("email").value;
-    const message = document.getElementById("message").value;
-
-    if (name === "" || email === "" || message === "") {
-        formMessage.textContent = "Please fill in all fields.";
-        formMessage.style.color = "red";
-        return;
-    }
-
-    if (!email.includes("@")) {
-        formMessage.textContent = "Please enter a valid email.";
-        formMessage.style.color = "red";
-        return;
-    }
-
-    formMessage.textContent = "Message sent successfully!";
-    formMessage.style.color = "green";
-
+// 4. Contact Form Logic
+document.getElementById("contactForm").addEventListener("submit", (e) => {
+    e.preventDefault();
+    const msg = document.getElementById("formMessage");
+    msg.textContent = "Message sent successfully!";
+    msg.style.color = "green";
 });
