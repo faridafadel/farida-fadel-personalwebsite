@@ -3,8 +3,6 @@ const quoteText = document.getElementById("quote-text");
 const quoteAuthor = document.getElementById("quote-author");
 const newQuoteBtn = document.getElementById("newQuoteBtn");
 
-
-
 async function getQuote() {
     quoteText.textContent = "Fetching inspiration...";
     quoteAuthor.textContent = "";
@@ -17,15 +15,15 @@ async function getQuote() {
     ];
 
     try {
-        const response = await fetch("https://api.allorigins.win/raw?url=https://zenquotes.io/api/random");
+        const response = await fetch("https://api.allorigins.win/get?url=" + encodeURIComponent("https://zenquotes.io/api/random"));
         
         if (!response.ok) throw new Error("API Network response was not ok");
         
-        const data = await response.json();
-        
+        const wrapper = await response.json();
+        const data = JSON.parse(wrapper.contents); 
         
         if (data && data[0]) {
-            quoteText.textContent = `"${data[0].q}"`;
+          
             quoteAuthor.textContent = `- ${data[0].a}`;
             console.log("Quote loaded from API.");
         } else {
@@ -33,29 +31,25 @@ async function getQuote() {
         }
 
     } catch (error) {
+        console.warn("External API failed. Using fallback quote.", error);
         
-        console.warn("External API failed or blocked. Using fallback quote.", error);
-        
-      
         const randomIndex = Math.floor(Math.random() * fallbackQuotes.length);
         const backupQuote = fallbackQuotes[randomIndex];
-        
         
         quoteText.textContent = `"${backupQuote.content}"`;
         quoteAuthor.textContent = `- ${backupQuote.author} (Offline Mode)`;
     }
 }
 
-
-window.onload = getQuote;
+window.addEventListener("DOMContentLoaded", getQuote);
 newQuoteBtn.addEventListener("click", getQuote);
 
-// 2. Dark Mode Toggle
+// 2. Dark Mode Toggle (UX Enhancement)
 document.getElementById("modeToggle").addEventListener("click", () => {
     document.body.classList.toggle("dark-mode");
 });
 
-// 3. Add Skill Logic (Maintained from Assignment 2)
+// 3. Add Skill Logic (Maintain Previous Work)
 document.getElementById("addSkill").addEventListener("click", () => {
     const input = document.getElementById("newSkill");
     if (input.value.trim() !== "") {
